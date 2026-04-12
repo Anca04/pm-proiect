@@ -21,29 +21,51 @@ The idea for this project started during a brainstorming session with a colleagu
 
 ## Architecture
 
+The project is divided into a few main parts that work together to make the claw machine move and grab prizes.
+
+Main Components:
+* **The Controller**: The 'brain' of the machine (the STM32 board). It processes the logic of the arcade game and coordinates all other parts.
+* **The Movement System:** Three motors responsible for movement. They ensure the claw reaches the exact position above the prize and handle the up-and-down movement.
+* **The Grip System**: The claw is powered by a SG90 servo motor that opens and closes it. This part is responsible for picking up the prize.
+* **The Buttons**: A set of buttons mounted on a breadboard. These allow the player to move the claw on the OX, OY, and OZ axes and operate the grip.
+* **Boundaries**: Small switches placed at the ends of the axes (OX and OY). They tell the STM32 to stop the motors if the claw reaches the edge of the frame.
+
+![Diagram](images/diagrama.svg)
+![Schematic](images/poza1.webp)
+![MovementMechanism](images/poza2.webp)
+![Claw](images/poza3.webp)
+![FullArhitecture](images/poza4.webp)
+
 ## Log
 
 ### Week 16 - 20 March
 
-Defining the concept of the project and the list of the components.\
-Establishing the movement logic for the OX, OY, and OZ axes.\
-Researching the necessary limit switches for axis safety.\
-Creating the initial hardware architecture.
+Defined the concept of the project and the list of the components.\
+Analyzed the movement logic for the OX, OY, and OZ axes.\
+Researched the necessary limit switches for boundaries.
 
 ### Week 23 - 27 March
 
-Researching and selecting the stepper motors to ensure the movement of the claw.\
-Selecting the appropiate servo motor for the claw's opening and closing mechanism.\
-Choosing a button-based interface instead of a joystick to avoid misalignment and ensure precise directional control.
+Researched and selected the stepper motors to ensure the movement of the claw.\
+Selected the appropriate servo motor for the claw's opening and closing mechanism.\
+Chose a button-based interface instead of a joystick to avoid misalignment and ensure precise directional control.
 
 ### Week 30 March - 3 April
-Ordering the hardware components and finalizing the Bill of Materials.
+Ordered the hardware components.
 
 ### Week 6 - 11 April
-Starting to build the casing and assembling the 3-axis system.\
-Assembling the claw and the gripping mechanism using the servo motor.\
-Beginning to connect the motors and limit switches to the STM32.\
-Starting to write the control code, testing each component individually.
+Built the casing and assembled the 3-axis system.\
+Assembled the claw and the gripping mechanism using the servo motor.\
+Connected the motors and limit switches to the STM32.\
+Developed the control code, testing each component individually.\
+Finalized the assembly and debugging of the entire project, resulting in a fully functional 3D claw machine.
+
+<iframe width="100%" height="450" 
+src="https://www.youtube.com/embed/UxUb1glXL0c" 
+title="Claw Machine Demo" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+allowfullscreen></iframe>
 
 ## Hardware
 
@@ -56,7 +78,9 @@ Starting to write the control code, testing each component individually.
 | Micro Limit Switch | Acts as an endstop for axis safety | [5.23 RON](https://sigmanortec.ro/Endstop-mecanic-SS-5GL2-p136284192) x 4 |
 | GT2 Timing Pulley - 20 Teeth, 5mm Bore | Connected to the motors to move the cords for each axis. | [4.67 RON](https://sigmanortec.ro/Fulie-dintata-GT2-20-dinti-ax-5mm-p125814315) x 3 |
 | Breadboard | Used for organizing and connecting all electronic parts and power lines. | [11.30 RON](https://sigmanortec.ro/Breadboard-830-puncte-MB-102-p125923983) | 
-|                                                                                        | Total                            | 221.13 RON                                                                                                                                                        |
+| Plexiglass | Used to build the walls. | 70 RON |
+| Polycarbonate Sheets | Used to build the floor and the structural system for the axis movement. | 20 RON |
+|                                                                                        | Total                            | 311.13 RON                                                                                                                                                        |
 
 
 ## Links
