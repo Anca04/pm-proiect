@@ -25,7 +25,7 @@ The project is divided into a few main parts that work together to make the claw
 
 Main Components:
 * **The Controller**: The 'brain' of the machine (the STM32 board). It processes the logic of the arcade game and coordinates all other parts.
-* **The Movement System:** Three motors responsible for movement. They ensure the claw reaches the exact position above the prize and handle the up-and-down movement.
+* **The Movement System**: Three motors responsible for movement. They ensure the claw reaches the exact position above the prize and handle the up-and-down movement.
 * **The Grip System**: The claw is powered by a SG90 servo motor that opens and closes it. This part is responsible for picking up the prize.
 * **The Buttons**: A set of buttons mounted on a breadboard. These allow the player to move the claw on the OX, OY, and OZ axes and operate the grip.
 * **Boundaries**: Small switches placed at the ends of the axes (OX and OY). They tell the STM32 to stop the motors if the claw reaches the edge of the frame.
@@ -68,6 +68,17 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 allowfullscreen></iframe>
 
 ## Hardware
+
+The project is built around the **STM32 Nucleo** board, which acts as the main controller. It manages everything from reading button presses to moving the motors in the right direction.
+
+Main parts:
+1. **STM32 Nucleo Board**: This is the 'brain' of the machine. It receives signals from the buttons and tells the motors exactly how many steps to move. It also makes sure the claw doesn't hit the walls by checking the limit switches.
+2. **28byj-48 Stepper Motors and ULN2003 Drivers**: I used three stepper motors for movement. These motors are great because they move in small, precise steps. Each motor has a driver (ULN2003) that acts as a bridge, providing the power needed for the motors to spin. One motor moves the claw left/right, one moves it forward/backward, and the last one moves it up/down.
+3. **SG90 Servo Motor**: This small motor is located on the claw. Unlike the stepper motors, the servo is used only for opening and closing the claw. When you press the 'grab' button, the servo turns to a specific angle to pick up the prize.
+4. **Buttons**: These are the manual controls. The player uses them to navigate the claw to the desired position.
+5. **Limit Switches**: These are very important for safety. If the claw reaches the end of the frame, it hits a switch. The switch sends a signal to the STM32 to stop the motor immediately so the machine doesn't break.
+6. **Power Supply**: The stepper motors need more power than a simple USB cable from the laptop can provide. To solve this, I used a power adapter that connects to a wall outlet. This adapter converts the high voltage from the wall outlet to a safe 5V DC. This power goes directly to the stepper motors, ensuring they have enough strength to move the claw smoothly without overloading the STM32 board.
+
 
 ### Bill of Materials
  Device                                                                                 | Usage                            | Price                                                                                                                                                             |
