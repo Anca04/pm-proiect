@@ -79,6 +79,9 @@ Main parts:
 5. **Limit Switches**: These are very important for safety. If the claw reaches the end of the frame, it hits a switch. The switch sends a signal to the STM32 to stop the motor immediately so the machine doesn't break.
 6. **Power Supply**: The stepper motors need more power than a simple USB cable from the laptop can provide. To solve this, I used a power adapter that connects to a wall outlet. This adapter converts the high voltage from the wall outlet to a safe 5V DC. This power goes directly to the stepper motors, ensuring they have enough strength to move the claw smoothly without overloading the STM32 board.
 
+### Schematics
+
+![Circuit](images/circuit.webp)
 
 ### Bill of Materials
  Device                                                                                 | Usage                            | Price                                                                                                                                                             |
@@ -91,8 +94,24 @@ Main parts:
 | Breadboard | Used for organizing and connecting all electronic parts and power lines. | [11.30 RON](https://sigmanortec.ro/Breadboard-830-puncte-MB-102-p125923983) | 
 | Plexiglass | Used to build the walls. | 70 RON |
 | Polycarbonate Sheets | Used to build the floor and the structural system for the axis movement. | 20 RON |
-|                                                                                        | Total                            | 311.13 RON                                                                                                                                                        |
+| | Total | 311.13 RON |
 
+## Software
+
+| Library                                      | Description                    | Usage                                          |
+| -------------------------------------------------------------- | ------------------------------ | ---------------------------------------------- |
+| [embassy-stm32](https://github.com/embassy-rs/embassy/tree/main/embassy-stm32) | Hardware Interface | Acts as a bridge between the Rust code and the physical pins (GPIO, PWM). |
+| [embassy-time](https://github.com/embassy-rs/embassy/tree/main/embassy-time)  | Time Management | Provides precise delays to control the speed of the motors. |
+| [embassy-executor](https://github.com/embassy-rs/embassy/tree/main/embassy-executor) | Task Manager | Allows the system to run the main loop and handle inputs simultaneously. |
+| [defmt](https://github.com/knurling-rs/defmt)                  | Debug Logging      | Used to send status messages to the computer for debugging.                  |
+| [panic-probe](https://github.com/knurling-rs/probe-run/tree/main) | Error Handling | Ensures that if the code crashes, the error is reported via the debug probe. |
+
+![Diagrama_s](images/diagrama_s.webp)
+
+Key Implementation Details:
+* **Custom Stepper Driver**: Instead of using a generic library, I implemented a custom StepperMotor struct. This gives me direct control over the 8-step sequence of the motors, ensuring high precision.
+* **Movement Boundaries**: Every movement command for the OX and OY axes is wrapped in a safety check. The motor only moves if the Limit Switch for that direction is not triggered.
+* **Servo Precision**: The claw is controlled using Pulse Width Modulation (PWM). The software limits the servo's movement between specific angles (25 to 125) to prevent mechanical strain on the claw.
 
 ## Links
 
