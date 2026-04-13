@@ -5,7 +5,7 @@ An arcade claw machine that lets players grab prizes using a custom claw.
 :::info
 
 **Author**: Anca-Maria Stanciu \
-**Github Project Link**: https://github.com/Anca04/pm-proiect
+**Github Project Link**: https://github.com/UPB-PMRust-Students/acs-project-2026-Anca04-1
 
 :::
 
